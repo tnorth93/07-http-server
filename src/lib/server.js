@@ -17,32 +17,32 @@ const app = http.createServer((request, response) => {
         response.write(`<!DOCTYPE html> 
           <head>Head</head>
           <body>
-            <h1><a href="/cowsay">/cowsay</h1>
+            <h1><a href="localhost:3000/api/cowsay">cowsay</h1>
           </body>
           </html>
         `);
         logger.log(logger.INFO, 'Responding with 200 status code and HTML doc');
         response.end();
         return undefined; // forces end of function
-      } else if (parsedRequest.method === 'POST' && parsedRequest.url === '/message') {
+      }
+      if (parsedRequest.method === 'POST' && parsedRequest.url === '/api/cowsay') {
         response.writeHead(200, { 'Content-Type': 'application/JSON' });
-        response.write('this is a string');
+        response.write(cowsay.say({ text: parsedRequest.body.text }));
         logger.log(logger.INFO, 'Responding with 200 status code and JSON doc');
         response.end();
         return undefined;
-      } else {
-        logger.log(logger.INFO, 'Responding with a 404 status code: nOt FoUnD');
-        response.writeHead(404, { 'Content-Type': 'text/plain' });
-        response.write('Not Found');
-
-        response.end();
-        return undefined;
       }
+      logger.log(logger.INFO, 'Responding with a 404 status code: nOt FoUnD');
+      response.writeHead(404, { 'Content-Type': 'text/plain' });
+      response.write('Not Found DAWGG');
+
+      response.end();
+      return undefined;
     })
-    .catch(() => {
+    .catch((error) => {
       logger.log(logger.INFO, 'Responding with a 400 status code');
       response.writeHead(400, { 'Content-Type': 'text/plain' });
-      response.write('Bad Request');
+      response.write('Bad Request bro', error);
 
       response.end();
       return undefined;
