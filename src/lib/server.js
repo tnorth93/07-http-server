@@ -18,6 +18,7 @@ const app = http.createServer((request, response) => {
           <head>Head</head>
           <body>
             <h1><a href="localhost:3000/api/cowsay">cowsay</h1>
+            <p>"WOW! This is a primitive server I created using JavaScript"</p>
           </body>
           </html>
         `);
@@ -34,7 +35,7 @@ const app = http.createServer((request, response) => {
       }
       logger.log(logger.INFO, 'Responding with a 404 status code: nOt FoUnD');
       response.writeHead(404, { 'Content-Type': 'text/plain' });
-      response.write('Not Found DAWGG');
+      response.write('Not Found');
 
       response.end();
       return undefined;
