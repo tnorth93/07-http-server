@@ -1,7 +1,7 @@
 'use strict';
 
-const querystring = require('querystring');
-const url = require('url');
+// const querystring = require('querystring');
+// const url = require('url');
 const logger = require('./logger');
 
 const requestParser = module.exports = {};
